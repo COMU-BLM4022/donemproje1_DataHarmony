@@ -1,0 +1,48 @@
+---
+title: "Week1"
+author: "DataHarmony"
+date: '2024-05-02'
+output: html_document
+---
+
+
+*Q1 : IMS platformunun belirlenmesi*
+
+SugarCRM, müşteri ilişkileri yönetimi (CRM) yazılımı sunan bir şirkettir. Şirketin tarihçesi ve ürünleri şu şekildedir:
+
+*Kısa Tarihçe:*
+
+SugarCRM, 2004 yılında kurulmuştur.
+Şirket, açık kaynaklı bir CRM platformu olarak başladı ve daha sonra ticari bir model benimsedi.
+SugarCRM, kullanıcıların müşteri ilişkilerini yönetmelerine, satış faaliyetlerini takip etmelerine, pazarlama kampanyalarını yönetmelerine ve müşteri hizmetlerini iyileştirmelerine olanak tanıyan çeşitli ürünler sunmaktadır.
+
+*Platformun Sunduğu Özellikler:*
+
+Müşteri İlişkileri Yönetimi (CRM)
+Satış Yönetimi ve Takibi
+Pazarlama Kampanyaları Yönetimi
+Müşteri Desteği ve Hizmetleri Yönetimi
+Raporlama ve Analiz Araçları
+Entegrasyon Yetenekleri (E-posta, Takvim, vs.)
+Kişiselleştirme ve Özelleştirme Seçenekleri
+
+*Kullanılan Teknolojiler:*
+
+Yazılım Dili: PHP
+Veritabanı: MySQL (Varsayılan olarak)
+Web Sunucusu: Apache HTTP Server
+Diğer Teknolojiler: JavaScript, HTML, CSS
+
+*API Özellikleri:*
+
+SugarCRM, geliştiricilere RESTful API aracılığıyla platforma erişim sağlar. API'nin sunduğu bazı özellikler şunlardır:
+Veri Erişimi ve Manipülasyonu: Kayıt oluşturma, güncelleme, silme.
+Modül Yönetimi: Müşteriler, İletişim Kişileri, Satış Fırsatları vb.
+Güvenlik ve Yetkilendirme Kontrolleri: Kimlik doğrulama, erişim kontrolleri.
+Entegrasyonlar: Üçüncü taraf uygulamalarla entegrasyon sağlama.
+Veri Senkronizasyonu: SugarCRM verilerini diğer sistemlerle senkronize etme.
+Özelleştirme: API aracılığıyla özel modüller ve iş akışları oluşturma.
+SugarCRM, kullanıcı dostu bir arayüzle müşteri ilişkilerini yönetmek için geniş özellikler sunar ve geliştiriciler için API aracılığıyla platformun esnekliğini ve genişletilebilirliğini sağlar.
+
+
+Seçtiğim kategoriler arasında Customer Relationship Management (CRM) Systems ve IMS platformu olarak SugarCRM'i tercih etmemin temel nedenleri, veri çeşitliliği ve miktarının yanı sıra somut verilerin anlaşılır olmasıyla ilgilidir. Bu platformlar, işletmelerin müşteri ilişkilerini yönetme ihtiyaçlarına çeşitli veri türlerini kapsamlı bir şekilde ele alma yeteneği sunar.
