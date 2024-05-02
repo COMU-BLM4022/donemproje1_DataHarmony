@@ -56,3 +56,22 @@ Veri setlerimizi Kaggle platformunda bulduk ve bu veri setleri banka verilerini 
 https://www.kaggle.com/datasets/thedevastator/predicting-credit-card-customer-attrition-with-m
 https://www.kaggle.com/datasets/shivamb/bank-customer-segmentation
 https://www.kaggle.com/datasets/zain280/bank-customer-information-and-marketing-response
+
+*Q3 : İş  tanımı*
+
+Şirketimiz DataHarmony, SugarCRM'i kullanan bir şirket olarak, müşteri ilişkileri yönetimi (CRM) ve veri entegrasyonu alanında uzmanlaşmış bir işletmedir. IMS (İş İletişim Yönetimi) çözümlerini kullanarak müşterilerin işletme süreçlerini optimize etmeyi ve verimliliği artırmayı hedefler.
+
+
+DataHarmony, SugarCRM'i kullanan bir şirket olarak, müşteri ilişkileri yönetimi (CRM) ve veri entegrasyonu alanında uzmanlaşmış bir işletmedir. IMS (İş İletişim Yönetimi) çözümlerini kullanarak müşterilerin işletme süreçlerini optimize etmeyi ve verimliliği artırmayı hedefler.
+
+*Tanımı:* DataHarmony, müşterilerin işletme süreçlerini iyileştirmek için SugarCRM ve IMS çözümlerini entegre eden bir teknoloji şirketidir.
+Aktiviteleri ve Rutin Operasyonları:
+Müşteri ihtiyaçlarını analiz etme ve gereksinimlerini belirleme.
+SugarCRM ve IMS entegrasyonunu gerçekleştirme ve özelleştirme.
+Müşteri eğitimi ve destek sağlama.
+Müşteri geri bildirimlerini toplama ve ürün iyileştirmeleri için geri bildirimleri değerlendirme.
+Yeni pazarlama stratejileri geliştirme ve uygulama.
+Gelir Modeli: DataHarmony, SugarCRM ve IMS entegrasyon hizmetleri sunarak ve danışmanlık ve özelleştirme hizmetleri üzerinden gelir elde eder.  Şirketimizin mevcut gelir kaynağı ise Shock Bank’ a verdiğimiz danışmanlık hizmetleri üzerinden sağlanmaktadır.
+
+Olası rakipler genellikle büyük CRM sağlayıcıları, bulut tabanlı yazılım şirketleri ve müşteri ilişkileri yönetimi çözümleri sunan firmalar olacaktır. Bu rakipler genellikle geniş bir müşteri tabanına ve kapsamlı bir ürün yelpazesine sahiptir. Büyük CRM sağlayıcıları dünya çapında tanınmış, bulut tabanlı yazılım şirketleri esnek fiyatlandırma modelleri ve özellik zenginliği sunar. Müşteri ilişkileri yönetimi çözümleri sağlayıcıları ise belirli sektörlere odaklanmış çözümler sunarak rekabet avantajı sağlarlar.
+
