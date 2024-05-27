@@ -318,3 +318,9 @@ Yukarıda ki pasta grafiğinde kart kategorisinin dağılımı gösterilmektedir
 
 Elde edilen grafikte de görüldüğü üzere "Temel" kart kategorisine sahip kişiler çoğunluktadır. Buradan da anlaşıldığı üzere *Shock Bank* müşterilerine karşı risk almadığı bir politika izlemektedir.
 
+
+## Q4: Veri setinin BYS platformuna ithali
+
+Projede kullanılacak veri seti, CSV formatında olup, SuiteCRM bilgi yönetim sisteminde oluşturulan modülün "import" özelliği kullanılarak entegre edilmiştir. Bu süreçte, SuiteCRM'in veri entegrasyon araçları ve modül tabanlı yapılandırma özellikleri etkin bir şekilde kullanılmıştır. Verilerin doğru ve tutarlı bir şekilde aktarılması için CSV dosyalarının formatı, sistem gereksinimlerine uygun olarak düzenlenmiş ve veri temizleme işlemleri uygulanmıştır. Bu entegrasyon, projenin veri analiz ve işleme aşamalarında kullanılmak üzere güvenilir ve erişilebilir bir veri kaynağı sağlamaktadır.
+
+
