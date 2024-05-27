@@ -12,3 +12,309 @@ output:
 
 
 
+## Q2: İş problemini çözmede kullanılacak data seti
+
+*DataHarmony* ekibi olarak kullandığımız veri seti şirketimizin hizmet verdiği *Shock Bank* kullanıcılarının bilgilerini içermektedir. Veri setinde 5000 kullanıcı verisi ile birlikte her kullanıcıya ait 13 adet özellik bulunmaktadır. Bu özellikler farklı sütunlarda listelenmektedir. 
+
+### Veri setimizde ki kullanıcı özellikleri:  
+
+
+* Müşteri numarası: Her kullanıcının benzersiz olarak tanımlanan id bilgisi listelenmektedir.
+
+* İsim            : Kullanıcının ismi listelenmektedir.
+
+* Soyisim         : Kullanıcının soyismi listelenmektedir.
+
+* Email           : Kullanıcının email adresi listelenmektedir.
+
+* Telefon Numarası: Kullanıcının telefon numarası listelenmektedir.
+
+* Doğum Günü      : Kullanıcının doğum günü listelenmektedir.
+
+* Yaş             : Kullanıcının yaş bilgisi listelenmektedir.
+
+* Medeni Durum    : Kullanıcının medeni durum bilgisi listelenmektedir.
+
+* İşlem Tarihi    : Kullanıcının bankada işlem yaptığı gün bilgisi listelenmektedir.
+
+* Hesap Sayısı    : Kullanıcıya ait mevcut hesap sayısı listelenmektedir.
+
+* Kart Kategorisi : Kullanıcıya ait kredi kartının **Temel**,**Orta** ve **İleri** kart kategorilerinden hangi kategoride bulunduğunu listeler.
+
+* Gelir           : Kullanıcının aylık gelir bilgisini listelenmektedir.
+
+* Kredi Limiti    : Kullanıcının kredi kartı limitini listelenmektedir.
+
+Projede kullanılan veri seti Kaggle platformunda ki 4 farklı veri setinden alınmış özellikleri barındırır. 
+
+### Kullanılan veri setlerinin adresleri ve hangi sütun bilgilerinin kullanıldığı:  
+
+* *https://www.kaggle.com/datasets/thedevastator/predicting-credit-card-customer-attrition-with-m* 
+
+**Veri setinden kullanılan sütun bilgileri:** Müşteri Numarası , Yaş , Hesap Sayısı , Medeni Durum , Gelir , Kart Kategorisi , Kredi Limiti
+
+**Veri setinin oluşturulması              :** Bu veri seti **https://zenodo.org/record/4322342#.Y8OsBdJBwUE** adresinden scraping yöntemi ile oluşturulmuştur
+
+* *https://www.kaggle.com/datasets/shivamb/bank-customer-segmentation *
+
+**Veri setinden kullanılan sütun bilgileri:** Doğum Tarihi , İşlem Tarihi
+
+**Veri setinin oluşturulması              :** Bu veri seti, Hindistan'daki bir bankadan alınmıştır.
+
+* *https://www.kaggle.com/datasets/iamsouravbanerjee/customer-segmentation-51k-records *
+
+**Veri setinden kullanılan sütun bilgileri:** İsim , Soyisim , Email
+
+**Veri setinin oluşturulması              :** Bu veri seti **https://www.mockaroo.com/** sitesinden oluşturulmuş sahte verileri içerir.
+
+* *https://www.kaggle.com/datasets/mokar2001/tehran-easytoremember-phone-number-price *
+
+**Veri setinden kullanılan sütun bilgileri:** Telefon Numarası
+
+**Veri setinin oluşturulması              :** Bu veri setine ait tüm veriler rond.ir'e aittir. Bu verileri toplamak için python ve tarama tekniğini kullanılmıştır.
+
+## Q3: Veri seti keşifsel analizi
+
+### Projemizde bulunan sorunu çözmek için kullanılacak veri setinde ki önemli sütunlar:  
+
+
+* **İşlem Tarihi**    : Character veri tipindedir.
+* **Hesap Sayısı**    : Numeric veri tipindedir.
+* **Kart Kategorisi** : Character veri tipindedir.
+* **Gelir**           : Numeric veri tipindedir.
+* **Kredi Limiti**    : Numeric veri tipindedir.
+
+### Veri setinde yapılan ön işleme operasyonları:
+
+
+* Gelir ve Medeni Durum sütunlarında ki "unknown" ve Doğum Günü sütununda ki "nan" olarak belirtilmiş eksik veriler R programlama dilinde yapılacak işlemlerde sorun yaratmaması için "NA" formatına dönüştürüldü.
+
+* Gelir sütununda ki character veriler numeric verilere dönüştürüldü.
+
+* Gelir sütununda bulunan eksik veriler ilgili grubun ortalaması ile dolduruldu.
+
+* Medeni Durum ve Doğum Günü sütunlarında ki eksik verilerin oranı çok düşük olduğu için bir işlem yapılmadı.
+
+* Medeni Durum ve Kart Kategorisi sütunlarında bulunan anlamsız veriler anlamlı hale getirildi.
+
+* Veri setinde ki sütun isimleri anlaşılır hale getirildi.
+
+
+
+
+
+
+### VERİ SETİ İSTATİSTİĞİ
+
+**Ortalama Gelir - Yas Tablosu:**
+
+```{r Veri Ön İşleme, echo=FALSE, message=FALSE, warning=FALSE}
+  
+  library(readr)
+  library(dplyr)
+  library(tidyr)
+
+  veri1 <-  read.csv("veri2.csv")
+  veri2 <-  read.csv("veri3.csv")
+  phone <- read.csv("phone.csv")
+  info <- read.csv("info.csv")
+
+
+
+  Clientnum <- veri2[sample(nrow(veri2), 5000), c("CLIENTNUM")]
+  info_sample <- info[sample(nrow(info), 5000), c("first_name", "last_name", "email")]
+  phone <- phone[sample(nrow(phone), 5000), "Phone"]
+  BirthDay <- veri1[sample(nrow(veri1), 5000), c("CustomerDOB")]
+  TransactionDate <- veri1[sample(nrow(veri1), 5000), c("TransactionDate")]
+  age <- veri2[sample(nrow(veri2), 5000), c("Customer_Age", "Marital_Status")]
+  veri2_sample <- veri2[sample(nrow(veri2), 5000), c("Dependent_count","Card_Category","Income_Category", "Credit_Limit")]
+
+  # Birleştir
+  birlestirilmis_veri <- cbind(Clientnum, info_sample, phone, BirthDay, age, TransactionDate, veri2_sample)
+  
+   #Eksik değerleri NA olarak güncelle
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Marital_Status = ifelse(Marital_Status == "Unknown", NA, Marital_Status))
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Income_Category = ifelse(Income_Category == "Unknown", NA, Income_Category))
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(BirthDay = ifelse(BirthDay == "nan", NA, BirthDay))
+
+  # NA değerlerinin bulunduğu satırları silme
+  tamveri <- birlestirilmis_veri %>%
+    filter(!is.na(Income_Category))
+
+  #Income_Category sütunununda ki verilerin character tipinden numeric tipine dönüştürülmesi sırasında hata alındığından bu şekilde denenmiştir.
+  #Hatanın neden çözüldüğü bilinmemektedir.
+  tamveri <- head(tamveri, 5000)
+
+  #Income_Category sütunununda ki verilerin character tipinden numeric tipine dönüştürülmesi
+
+  set.seed(123) # Rastgeleliği tekrarlanabilir kılmak için
+
+  tamveri <- tamveri %>%
+    mutate(Income_Category = case_when(
+      Income_Category == "Less than $40K" ~ sample(10000:40000, 1),
+      Income_Category == "$40K - $60K" ~ sample(40000:60000, 1),
+      Income_Category == "$60K - $80K" ~ sample(60000:80000, 1),
+      Income_Category == "$80K - $120K" ~ sample(80000:120000, 1),
+      Income_Category == "$120K +" ~ sample(120000:200000, 1),
+      TRUE ~ as.numeric(Income_Category)  # Diğer durumlar için mevcut değeri korur
+    ))
+
+  #Income_Category sütununun
+  mean_income <- mean(tamveri$Income_Category)
+
+  #Veri setinde Income_Category sütununda bulunan Nan değerlerin o sütunun ortalama değeri ile doldurulması
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Income_Category = ifelse(is.na(Income_Category), mean_income, Income_Category))
+
+  birlestirilmis_veri <- head(birlestirilmis_veri, 5000)
+
+  #Income_Category sütunununda ki verilerin character tipinden numeric tipine dönüştürülmesi
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Income_Category = case_when(
+      Income_Category == "Less than $40K" ~ sample(10000:40000, 1),
+      Income_Category == "$40K - $60K" ~ sample(40000:60000, 1),
+      Income_Category == "$60K - $80K" ~ sample(60000:80000, 1),
+      Income_Category == "$80K - $120K" ~ sample(80000:120000, 1),
+      Income_Category == "$120K +" ~ sample(120000:200000, 1),
+      TRUE ~ as.numeric(Income_Category)  # Diğer durumlar için mevcut değeri korur
+    ))
+
+  # Marital_Status sütununda ki verilerin anlamlı hale getirilmesi
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Marital_Status = ifelse(Marital_Status == "Single", "Bekar", Marital_Status))
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Marital_Status = ifelse(Marital_Status == "Married", "Evli", Marital_Status))
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Marital_Status = ifelse(Marital_Status == "Divorced", "Bosanmis", Marital_Status))
+
+  #Card_Category sütununda ki verilerin anlamlı hale getirilmesi
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Card_Category = ifelse(Card_Category == "Blue", "Temel", Card_Category))
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Card_Category = ifelse(Card_Category == "Silver", "Orta", Card_Category))
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    mutate(Card_Category = ifelse(Card_Category == "Gold", "İleri", Card_Category))
+
+  # Sütun adlarının değiştirilmesi
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Gelir = Income_Category)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Musteri_Numarasi = Clientnum)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Isim = first_name)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Soyisim = last_name)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Telefon_numarasi = phone)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Dogum_gunu = BirthDay)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Yas = Customer_Age)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Medeni_durum = Marital_Status)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Islem_tarihi = TransactionDate)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Hesap_sayisi = Dependent_count)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Kart_kategori = Card_Category)
+
+  birlestirilmis_veri <- birlestirilmis_veri %>%
+    rename(Kredi_limiti = Credit_Limit)
+  
+
+  
+
+  ortalama_gelir_tablosu <- birlestirilmis_veri %>%
+  group_by(Yas) %>%
+  summarise(ortalama_gelir = mean(Gelir)) %>%
+  arrange(Yas)
+
+# Sonuçları kontrol etme
+head(ortalama_gelir_tablosu,43)
+  
+
+```
+
+
+Yukarıda ki tabloda veri setimizde yaşa göre gelir ortalamaları gösterilmektedir.
+
+
+
+**Ortalama Gelir - Yas Grafiği:**
+
+
+
+
+```{r grafik, echo=FALSE , message=FALSE, warning=FALSE}
+library(ggplot2)
+
+ortalama_gelir <- birlestirilmis_veri %>%
+  group_by(Yas) %>%
+  summarise(ortalama_gelir = mean(Gelir)) %>%
+  arrange(Yas)
+
+ggplot(ortalama_gelir, aes(x = Yas, y = ortalama_gelir)) +
+  geom_line(color = "blue", size = 1) +  # Çizgiyi mavi renkte yap
+  geom_point(color = "red", size = 3) +  # Noktaları kırmızı renkte yap
+  labs(title = "Yas Gruplarına Gore Ortalama Gelir",
+       x = "Yaş",
+       y = "Ortalama Gelir") +
+  theme_minimal()
+```
+
+Yukarıda ki grafikte veri setimizde yaşa göre gelir ortalamaları gösterilmektedir. 
+
+Elde edilen tablo ve grafik verileri göz önüne alındığında 30-60 yaş aralığında ki ortalama gelir düzeyinin büyük oranda bir değişim gözlenmemektedir. Genç nesillerde refah düzeyi çok daha Volatil olduğu görülmektedir.
+
+
+
+**Kart Kategorisi Pasta Grafiği:**
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+kart_kategorisi_sayim <- birlestirilmis_veri %>%
+  count(Kart_kategori)
+
+
+# Pasta grafiği oluşturma
+ggplot(kart_kategorisi_sayim, aes(x = "", y = n, fill = Kart_kategori)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Kart Kategorisi Dağılımı") +
+  theme_void() +  # Tema boş
+  scale_fill_brewer(palette = "Set3")  # Renk paleti
+```
+
+
+
+
+
+
+Yukarıda ki pasta grafiğinde kart kategorisinin dağılımı gösterilmektedir. 
+
+
+Elde edilen grafikte de görüldüğü üzere "Temel" kart kategorisine sahip kişiler çoğunluktadır. Buradan da anlaşıldığı üzere *Shock Bank* müşterilerine karşı risk almadığı bir politika izlemektedir.
+
