@@ -12,3 +12,63 @@ output:
 
 
 
+## Q2: İş problemini çözmede kullanılacak data seti
+
+*DataHarmony* ekibi olarak kullandığımız veri seti şirketimizin hizmet verdiği *Shock Bank* kullanıcılarının bilgilerini içermektedir. Veri setinde 5000 kullanıcı verisi ile birlikte her kullanıcıya ait 13 adet özellik bulunmaktadır. Bu özellikler farklı sütunlarda listelenmektedir. 
+
+### Veri setimizde ki kullanıcı özellikleri:  
+
+
+* Müşteri numarası: Her kullanıcının benzersiz olarak tanımlanan id bilgisi listelenmektedir.
+
+* İsim            : Kullanıcının ismi listelenmektedir.
+
+* Soyisim         : Kullanıcının soyismi listelenmektedir.
+
+* Email           : Kullanıcının email adresi listelenmektedir.
+
+* Telefon Numarası: Kullanıcının telefon numarası listelenmektedir.
+
+* Doğum Günü      : Kullanıcının doğum günü listelenmektedir.
+
+* Yaş             : Kullanıcının yaş bilgisi listelenmektedir.
+
+* Medeni Durum    : Kullanıcının medeni durum bilgisi listelenmektedir.
+
+* İşlem Tarihi    : Kullanıcının bankada işlem yaptığı gün bilgisi listelenmektedir.
+
+* Hesap Sayısı    : Kullanıcıya ait mevcut hesap sayısı listelenmektedir.
+
+* Kart Kategorisi : Kullanıcıya ait kredi kartının **Temel**,**Orta** ve **İleri** kart kategorilerinden hangi kategoride bulunduğunu listeler.
+
+* Gelir           : Kullanıcının aylık gelir bilgisini listelenmektedir.
+
+* Kredi Limiti    : Kullanıcının kredi kartı limitini listelenmektedir.
+
+Projede kullanılan veri seti Kaggle platformunda ki 4 farklı veri setinden alınmış özellikleri barındırır. 
+
+### Kullanılan veri setlerinin adresleri ve hangi sütun bilgilerinin kullanıldığı:  
+
+* *https://www.kaggle.com/datasets/thedevastator/predicting-credit-card-customer-attrition-with-m* 
+
+**Veri setinden kullanılan sütun bilgileri:** Müşteri Numarası , Yaş , Hesap Sayısı , Medeni Durum , Gelir , Kart Kategorisi , Kredi Limiti
+
+**Veri setinin oluşturulması              :** Bu veri seti **https://zenodo.org/record/4322342#.Y8OsBdJBwUE** adresinden scraping yöntemi ile oluşturulmuştur
+
+* *https://www.kaggle.com/datasets/shivamb/bank-customer-segmentation *
+
+**Veri setinden kullanılan sütun bilgileri:** Doğum Tarihi , İşlem Tarihi
+
+**Veri setinin oluşturulması              :** Bu veri seti, Hindistan'daki bir bankadan alınmıştır.
+
+* *https://www.kaggle.com/datasets/iamsouravbanerjee/customer-segmentation-51k-records *
+
+**Veri setinden kullanılan sütun bilgileri:** İsim , Soyisim , Email
+
+**Veri setinin oluşturulması              :** Bu veri seti **https://www.mockaroo.com/** sitesinden oluşturulmuş sahte verileri içerir.
+
+* *https://www.kaggle.com/datasets/mokar2001/tehran-easytoremember-phone-number-price *
+
+**Veri setinden kullanılan sütun bilgileri:** Telefon Numarası
+
+**Veri setinin oluşturulması              :** Bu veri setine ait tüm veriler rond.ir'e aittir. Bu verileri toplamak için python ve tarama tekniğini kullanılmıştır.
