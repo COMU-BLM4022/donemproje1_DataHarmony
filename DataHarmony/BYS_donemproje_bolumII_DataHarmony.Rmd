@@ -1,0 +1,14 @@
+---
+title: "Bilgi Yönetim Sistemleri - Bitirme Projesi Rapor : Süleyman Oruç 190401026"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+## Q1: İş probleminin tanımı
+
+*DataHormony* Şirketi’nin satış verilerinin analizi ve tahmini üzerine bir iş problemi ele alınmıştır. **Amacımız**, geçmiş satış verilerini kullanarak gelecekteki satış trendlerini öngörmek ve stratejik kararları daha bilinçli bir şekilde almaktır.Kullandığımız İş Zekası (BYS) platformu SuiteCRM, müşteri ilişkileri yönetimi konusunda sunduğu özelleştirilebilir modüller, açık kaynak kodlu yapısı ve güçlü raporlama araçlarıyla öne çıkmaktadır. SuiteCRM'nin gelişmiş raporlama ve analiz özelliklerinden yararlanarak özelleştirilebilir raporlar ve dashboardlar oluşturacağız. Bu sayede müşteri ve satış verilerini merkezi bir şekilde yönetip, çeşitli veri kaynaklarını bütüncül bir şekilde analiz edebileceğiz.
+
+
+
