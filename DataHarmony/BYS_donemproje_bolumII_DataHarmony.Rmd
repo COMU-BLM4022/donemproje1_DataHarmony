@@ -379,3 +379,11 @@ Eğitilen model, bilgi yönetim sistemimiz SuiteCRM ile entegre edilecektir. Sui
 **5. Sonuç ve Risk Yönetimi**
 
 Bu çalışmanın sonucunda, banka müşterilerinin kredi başvurularını değerlendirirken gereksiz risklerin önüne geçilmesi sağlanacaktır. Modelin yüksek doğruluk oranı ile çalışması, kredi risk yönetimini optimize ederek, finansal kayıpların minimize edilmesine katkıda bulunmuştur.
+
+
+
+## Q6 : Çalışan platformun gösterildiği sesli anlatımlı video
+
+**Video YouTube linkimiz:**
+
+https://www.youtube.com/watch?v=rKbp2Us0A8E&t=2s
