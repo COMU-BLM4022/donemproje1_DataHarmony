@@ -324,3 +324,58 @@ Elde edilen grafikte de görüldüğü üzere "Temel" kart kategorisine sahip ki
 Projede kullanılacak veri seti, CSV formatında olup, SuiteCRM bilgi yönetim sisteminde oluşturulan modülün "import" özelliği kullanılarak entegre edilmiştir. Bu süreçte, SuiteCRM'in veri entegrasyon araçları ve modül tabanlı yapılandırma özellikleri etkin bir şekilde kullanılmıştır. Verilerin doğru ve tutarlı bir şekilde aktarılması için CSV dosyalarının formatı, sistem gereksinimlerine uygun olarak düzenlenmiş ve veri temizleme işlemleri uygulanmıştır. Bu entegrasyon, projenin veri analiz ve işleme aşamalarında kullanılmak üzere güvenilir ve erişilebilir bir veri kaynağı sağlamaktadır.
 
 
+## Q5 : Yapılması planlanan veri analizi
+
+Projenin son bölümünde yapılması planlanan 2 adet analiz vardır. Yapılması planlanan ilk analiz veri setinde ki *işlem tarihi* sütununda bulunan verilere göre bankada gerçekleştirilen işlemlerin yoğunluğu belirlenecektir. Bu işlem sonucunda bankanın çalışan sayısını optimum düzeyde tutması ve giderlerinin azaltılması hedeflenmektedir. 
+
+
+
+
+
+
+### Sentetik Veri Üretimi ve Kredi Tahmin Modeli ile Risk Yönetimi
+Bu çalışmada, banka müşterilerinin kredi başvurularının değerlendirilmesi ve gereksiz risklerin minimize edilmesi amacıyla bir tahmin modeli geliştirilmiştir. Bu süreç, sentetik veri üretimi, model eğitimi ve entegrasyon aşamalarından oluşmaktadır.
+
+**1. Sentetik Veri Üretimi**
+
+İlk adım olarak, aşağıdaki sütunlardan oluşan bir veri seti sentetik olarak üretilecektir:
+
+* *Medeni Durum*
+
+* *Kart Kategorisi*
+
+* *Hesap Sayısı*
+
+* *Kredi Limiti*
+
+* *Gelir*
+
+Bu sütunlar, rastgele değerler ile oluşturulmuş ve belirli istatistiksel dağılımlara uygun olarak dağıtılacaktır. Örneğin, gelir için 20.000 TL ile 200.000 TL arasında değerler kullanılacaktır.
+
+**2. Kredi Verilip Verilmeyeceğine Dair Koşullar**
+
+Sentetik olarak üretilen verilere, kredi verilip verilmeyeceğine dair belirlenen koşullara göre Kredi_Ver sütunu eklenecektir. Bu sütun, müşterinin kredi alıp almayacağını belirtir ve iki farklı değere sahip olabilir:
+
+**Evet:** Müşteri kredi alabilir.
+
+**Hayır:** Müşteri kredi alamaz.
+
+*Bu koşullar, aşağıdaki kriterlere göre belirlenmiştir:*
+
+Kredi limiti belirli bir eşiğin üzerindeyse (örneğin, 10.000 TL).
+
+Gelir belirli bir miktarın üzerindeyse (örneğin, 50.000 TL).
+
+**3. Tahmin Modeli Oluşturma ve Eğitimi**
+
+Sentetik veri seti kullanılarak bir makine öğrenimi modeli oluşturulacak ve eğitilecektir. Bu model, sınıflandırma algoritmaları kullanılarak geliştirilecektir. Kullanılacak algoritmalar arasında, karar ağaçları (Decision Trees), lojistik regresyon (Logistic Regression), rastgele ormanlar (Random Forests) ve destek vektör makineleri (Support Vector Machines) yer alabilir. Modelin eğitimi ve test edilmesi için veri seti, eğitim ve test veri setleri olarak ikiye ayrılacaktır.
+
+Modelin performansı, doğruluk (accuracy), kesinlik (precision), geri çağırma (recall) ve F1 skoru gibi metrikler kullanılarak değerlendirilecektir.
+
+**4. SuiteCRM Entegrasyonu**
+
+Eğitilen model, bilgi yönetim sistemimiz SuiteCRM ile entegre edilecektir. SuiteCRM'den çekilen müşteri verileri, modelin girdisi olarak kullanılacak ve bu verilere Kredi_Ver sütunu eklenecektir. Bu entegrasyon sayesinde, banka müşterilerinin kredi başvuruları değerlendirilirken, modelin tahminleri doğrultusunda karar verilecektir.
+
+**5. Sonuç ve Risk Yönetimi**
+
+Bu çalışmanın sonucunda, banka müşterilerinin kredi başvurularını değerlendirirken gereksiz risklerin önüne geçilmesi sağlanacaktır. Modelin yüksek doğruluk oranı ile çalışması, kredi risk yönetimini optimize ederek, finansal kayıpların minimize edilmesine katkıda bulunmuştur.
