@@ -1,6 +1,7 @@
 ---
 title: "Bilgi Yönetim Sistemleri - Bitirme Projesi Rapor : Süleyman Oruç 190401026"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -153,6 +154,8 @@ birlestirilmis_veri <- birlestirilmis_veri %>%
 ```
 
 
+Makine öğrenmesi modeli için rastgele oluşturulan verilere aşağıda ki kod öbeğinde "ifelse" koşulları içinde belirtilen özelliklere göre Kredi Onayının olup olmadığını gösteren 1 (Kredi Onaylandı), 0 (Kredi Onaylanmadı) eklenmiştir.
+
 **Oluşturulan veri setine Kredi Onay sütununun eklenmesi**
 
 ```{r message=FALSE, warning=FALSE}
@@ -172,6 +175,10 @@ birlestirilmis_veri <- birlestirilmis_veri %>%
 
 ```
 
+
+Makine öğrenmesi modelinin oluşturulması konusunda Decision Tree kullanılması kararlaştırılmıştır. Aşağıda gerekli kod öbekleri görüntülenmektedir.
+
+
 **Makine öğrenmesi modelinin oluşturulması**
 
 ```{r message=FALSE, warning=FALSE}
@@ -188,11 +195,12 @@ kredi_uygun_tree <- rpart(Kredi_uygun ~ Hesap_sayisi + Gelir + Kredi_limiti, dat
 # Modeli görselleştirme
 rpart.plot(kredi_uygun_tree, type = 4, extra = 104)
 
+test_veri <-  read.csv("verib.csv")
+
 # Test veri seti üzerinde tahmin yapma
 test_pred <- predict(kredi_uygun_tree, test_veri, type = "class")
 
 
-test_veri <-  read.csv("verib.csv")
 
 tahminler <- predict(kredi_uygun_tree, test_veri, type = "class")
 
@@ -201,6 +209,7 @@ test_veri <- test_veri %>%
   mutate(Kredi_uygun = tahminler)
 
 ```
+
 
 
 **Modelin performansının değerlendirilmesi**
@@ -228,6 +237,10 @@ print(performance_metrics)
 
 ```
 
+Yukarıda ki model performans metrikleri incelendiğinde kullandığımız makine öğrenmesi tahmin modelimiz düşük bir başarı oranına sahiptir ancak bu projede yapılacak analiz için performansı yeterli görülmüştür.
+
+
+
 **Analiz sonuçlarının görselleştirilmesi**
 
 ```{r message=FALSE, warning=FALSE}
@@ -247,6 +260,18 @@ ggplot(kredi_uygun_toplam, aes(x = Medeni_durum, y = Kredi_uygun_toplam, fill = 
   theme_minimal() +
   scale_fill_brewer(palette = "Set1")
 
+
+```
+
+
+Yukarıda ki grafikte yapılan analizde Kredi Onayı alan müşterilerin medeni durumları ele alınmıştır. Grafik incelendiğinde evli ve bekar kişilerde pek fark gözlemlenmezken boşanmış kişilerin kredi açısından riskli grupta yer aldığı değerlendirilmiştir.
+
+
+**Analiz sonuçlarının görselleştirilmesi**
+
+```{r message=FALSE, warning=FALSE}
+
+
 kredi_uygun_toplam <- birlestirilmis_veri %>%
   group_by(Yas) %>%
   summarise(Kredi_uygun_toplam = sum(Kredi_uygun))
@@ -259,21 +284,19 @@ ggplot(kredi_uygun_toplam, aes(x = Yas, y = Kredi_uygun_toplam)) +
        y = "Kredi Uygun Toplamı") +
   theme_minimal()
 
-# Hesap_sayisi'na göre gruplandırarak Kredi_uygun toplamını hesaplama
-kredi_uygun_toplam <- birlestirilmis_veri %>%
-  group_by(Hesap_sayisi) %>%
-  summarise(Kredi_uygun_toplam = sum(Kredi_uygun))
-
-# Grafiği oluşturma
-ggplot(kredi_uygun_toplam, aes(x = as.factor(Hesap_sayisi), y = Kredi_uygun_toplam, fill = as.factor(Hesap_sayisi))) +
-  geom_bar(stat = "identity") +
-  labs(title = "Hesap Sayısına Göre Kredi Uygun Toplamları",
-       x = "Hesap Sayısı",
-       y = "Kredi Uygun Toplamı") +
-  theme_minimal() +
-  scale_fill_brewer(palette = "Set3")
+```
 
 
+
+Yukarıda ki grafikte Kredi Onayı alan kişilerin yaş dağılımları gösterilmektedir. Bu grafikte belirtilen analiz doğrultusunda 30'lu yaş altı ve 60 yaş üstü müşterilerin kredi onayı açısından riskli yaş gruplarında olduğu değerlendirilmiştir.  
+
+
+
+
+
+**Analiz sonuçlarının görselleştirilmesi**
+
+```{r message=FALSE, warning=FALSE}
 
 
 birlestirilmis_veri$Islem_tarihi <- as.Date(birlestirilmis_veri$Islem_tarihi, format = "%d/%m/%y")
@@ -286,36 +309,9 @@ tarih_yogunlugu <- sorted_data %>%
   group_by(Islem_tarihi) %>%
   summarise(yogunluk = n())
 
-# Veri çerçevesini oluşturma
-calisan_giderleri <- data.frame(
-  giderler = c(248000, 275000, 285000, 260000, 255000, 245000, 190000, 160000, 180000, 140000, 155500, 135000, 80000, 110000, 45000, 72000)
-)
-plot(calisan_giderleri$giderler, type = "o", col = "blue",
-     xlab = "Ay", ylab = "Müşteri Giderleri",
-     main = "Calisan Giderleri Grafiği")
-
-
-
-
-
-musteri <- test_data$Musteri_Numarasi
-isim <- test_data$Isim
-soyisim <- test_data$Soyisim
-kredi <- test_data$Kredi_uygun
-
-son <- cbind(musteri,isim,soyisim,kredi)
-
-data <- c(1:54)  # Örnek olarak 1'den 54'e kadar olan sayıları kullanıyoruz
-
-# Tek sütunlu bir data frame oluşturuyoruz
-df <- data.frame(column1 = data)
-
-tarih <- cbind(tarih_yogunlugu,df)
-write.csv(son, file = "son.csv", row.names = FALSE)
-write.csv(tarih, file = "tarih.csv", row.names = FALSE)
 
 ggplot(data = tarih_yogunlugu, aes(x = Islem_tarihi, y = yogunluk)) +
-  geom_line(color = "red") +  # Çizgi grafiği çizimi, rengi mavi olarak belirledik
+  geom_line(color = "red") +  # Çizgi grafiği çizimi, rengi kırmızı olarak belirledik
   labs(title = "Tarih İşlem Yoğunluğu",
        x = "İşlem Tarihi",
        y = "Yoğunluk") +  # Grafik için başlık ve eksen etiketlerini ekliyoruz
@@ -323,6 +319,33 @@ ggplot(data = tarih_yogunlugu, aes(x = Islem_tarihi, y = yogunluk)) +
 
 
 ```
+
+
+Yukarıda ki grafikte bankanın günlere göre işlem sayısı gösterilmektedir. Bu analiz grafiği kullanılarak banka çalışanlarının günlük yoğunluğa göre belirlenip çalışan giderlerinde tasarrufa gidilmesi öngörülmektedir.
+
+
+
+
+**Analiz sonuçlarının görselleştirilmesi**
+
+```{r message=FALSE, warning=FALSE}
+
+
+
+# Veri çerçevesini oluşturma
+calisan_giderleri <- data.frame(
+  giderler = c(248000, 275000, 285000, 260000, 255000, 245000, 190000, 160000, 180000, 140000, 155500, 135000, 80000, 110000, 45000, 72000)
+)
+plot(calisan_giderleri$giderler, type = "o", col = "blue",
+     xlab = "Ay", ylab = "Müşteri Giderleri",
+     main = "Calisan Giderleri Grafiği")
+```
+
+
+
+Yukarıda ki grafikte 6.ayda yapılan işlem yoğunluğu analizine göre çalışan sayısının ayarlanmasından sonra bankanın çalışan giderlerinin değişimi gösterilmektedir. Grafikte de görüldüğü üzere işlem yoğunluğu analizi bankamızın tasarrufu için önemli bir adım olmuştur.
+
+
 
 **Projenin canlıya alınması**
 
@@ -348,19 +371,19 @@ SuiteCRM kurulumuna başlamadan önce gerekli olan bileşenler ve araçlar şunl
 *3 .Sunucuya SuiteCRM kurup Bağlantıları Sağlamak*
 
 **Suite imagesini indirin**
-```{bash}
+
 docker pull bitnami/suitecrm:latest
-```
+
 
 
 **Bağlantı oluşturun**
-```{bash}
+
 docker network create suitecrm-network
-```
+
  
 
 **MariaDB kalıcılığı için bir hacim oluşturun ve bir MariaDB konteyneri oluşturun**
-```{bash}
+
 docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -370,11 +393,11 @@ docker run -d --name mariadb \
   --network suitecrm-network \
   --volume mariadb_data:/bitnami/mariadb \
   bitnami/mariadb:latest
-```
+
 
 
 **SuiteCRM kalıcılığı için hacimler oluşturun ve konteyneri başlatın**
-```{bash}
+
 docker volume create --name suitecrm_data
 docker run -d --name suitecrm \
   -p 8080:8080 -p 8443:8443 \
@@ -385,11 +408,12 @@ docker run -d --name suitecrm \
   --network suitecrm-network \
   --volume suitecrm_data:/bitnami/suitecrm \
   bitnami/suitecrm:latest
-```
+
 
 
  
 **oluşturduğumuz web bağlantısı**
+
 *http://162.19.249.190:8080/*
 
 
